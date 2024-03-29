@@ -69,9 +69,7 @@ app.post('/places', (req, res) => {
 app.get("/suggested-locations", (req, res) => {
   const suggestedLocations = getSuggestedLocations();
 
-  res.send(
-    suggestedLocations.map(location => renderLocation(location).join(""))
-  );
+  res.send(suggestedLocations.map(location => renderLocation(location)).join(""));
 });
 
 app.delete('/places/:id', (req, res) => {

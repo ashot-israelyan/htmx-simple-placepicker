@@ -3,15 +3,16 @@ import renderLocation from './components/location.js';
 export default function renderLocationsPage(suggestedLocations, availableLocations, interestingLocations) {
   return `
     <!DOCTYPE html>
-    <html>
+    <html lang="en">
       <head>
         <title>Interesting Locations</title>
         <link rel="stylesheet" href="/main.css" />
         <link rel="icon" href="/logo.png" />
         <script src="/htmx.js" defer></script>
+        <script src="/htmx-ext-debug.js" defer></script>
         <script src="/main.js" defer></script>
       </head>
-      <body>
+      <body hx-ext="debug">
         <header>
           <img src="/logo.png" alt="Stylized globe" />
           <h1>PlacePicker</h1>
@@ -27,11 +28,9 @@ export default function renderLocationsPage(suggestedLocations, availableLocatio
                 class="locations" 
                 id="suggested-locations" 
                 hx-get="/suggested-locations"
+                hx-trigger="every 5s"
             >
-                ${suggestedLocations
-                  .map(location => renderLocation(location))
-                  .join("")
-                }
+                ${suggestedLocations.map(location => renderLocation(location)).join("")}
             </ul>
           </section>
           
